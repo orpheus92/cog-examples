@@ -1,0 +1,7 @@
+build:
+  python_version: "3.11.9"
+  python_packages:
+    - "pillow==8.4"
+    - "torch==2.0.0"
+    - "ultralytics==8.2.21"
+predict: "predict.py:Predictor"

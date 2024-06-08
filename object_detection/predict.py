@@ -1,5 +1,6 @@
 from typing import Any
 
+import json
 import numpy as np
 from ultralytics import YOLO
 from cog import BasePredictor, Input, Path
@@ -14,7 +15,7 @@ from cog import BasePredictor, Input, Path
 class Predictor(BasePredictor):
     def setup(self):
         """Load the model into memory to make running multiple predictions efficient"""
-        self.model = model = YOLO("best.pt")
+        self.model = YOLO("best.pt")
         #ResNet50(weights="resnet50_weights_tf_dim_ordering_tf_kernels.h5")
 
     # Define the arguments and types the model takes as input
@@ -26,7 +27,9 @@ class Predictor(BasePredictor):
         #x = np.expand_dims(x, axis=0)
         #x = preprocess_input(x)
         # Run the prediction
-        preds = self.model.predict(x)
+        preds = self.model.predict(image)
+        classes = json.dumps(preds[0].names)
+        data = preds[0].boxes.data.numpy()
         # Return the top 3 predictions
-        print(preds)
-        return preds # decode_predictions(preds, top=3)[0]
+        print(classes, data)
+        return classes, data # decode_predictions(preds, top=3)[0]

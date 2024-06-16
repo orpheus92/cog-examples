@@ -1,0 +1,14 @@
+build:
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "libjpeg62"
+    - "libopenjp2-7"
+  python_version: "3.11"
+  python_packages:
+    - "pillow==10.3.0"
+    - "ultralytics==8.2.21"
+    - "openai==1.30.5"
+    - "transformers"
+    - "cog"
+predict: "predict.py:Predictor"
